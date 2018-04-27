@@ -6,5 +6,11 @@
  * and open the template in the editor.
  */
 
-
+/*
+ * 设置不同路由页面的类名
+ */
+function route_class()
+{
+    return str_replace('.', '-', Route::currentRouteName());
+}
 
