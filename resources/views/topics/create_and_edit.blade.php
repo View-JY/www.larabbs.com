@@ -29,19 +29,21 @@
                 @include('common.errors')
 
                 @if($topic->id)
-                    <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8">
+                    <form action="{{ route('topics.update', $topic->id) }}" method="POST" accept-charset="UTF-8"  enctype="multipart/form-data">
                         <input type="hidden" name="_method" value="PUT">
                 @else
-                    <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8">
+                    <form action="{{ route('topics.store') }}" method="POST" accept-charset="UTF-8"  enctype="multipart/form-data">
                 @endif
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="form-group">
+                        
                         <input class="form-control" type="text" name="title" value="{{ old('title', $topic->title ) }}" placeholder="请填写标题" required/>
                     </div>
 
                     <div class="form-group">
+                       
                         <select class="form-control" name="category_id" required>
                             <option value="" hidden disabled selected>请选择分类</option>
                             @foreach ($categories as $value)
@@ -49,6 +51,11 @@
                             @endforeach
                         </select>
                     </div>
+    
+                    <div class="form-group">
+                        <input id="file-Portrait" class="file" type="file" name="avatar">
+                    </div>
+                   
 
                     <div class="form-group">
                         <textarea name="body" class="form-control" id="editor" rows="3" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
@@ -67,6 +74,7 @@
 
 @section('link')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/simditor.css') }}">
+    <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
 @stop
 
 @section('script')
@@ -89,6 +97,29 @@
                 pasteImage: true,
             });
         });
+    </script>
+    
+    <script src="{{ asset('js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/fileinput_locale_zh.js') }}"></script>
+    <script>
+        // Bootstrap FileInput
+        function initFileInput(ctrlName, uploadUrl) {    
+            var control = $('#' + ctrlName); 
+            control.fileinput({
+                language: 'zh', //设置语言
+                enctype: 'multipart/form-data',
+                uploadUrl: uploadUrl, //上传的地址
+                allowedFileExtensions : ['jpg', 'png','gif'],//接收的文件后缀
+                showUpload: false, //是否显示上传按钮
+                showCaption: true,//是否显示标题
+                browseClass: "btn btn-success", //按钮样式             
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>", 
+                msgFilesTooMany: 1,
+                dropZoneEnabled: false
+            });
+        }
+        // 调用
+        initFileInput("file-Portrait", '{{ route('topics.upload_image') }}');
     </script>
 
 @stop

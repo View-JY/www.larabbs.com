@@ -8438,6 +8438,15 @@ body {
   margin-bottom: 0px;
 }
 
+.users-show-page .meta {
+  font-size: .9em;
+  color: #b3b3b3;
+}
+
+.users-show-page .reply-content {
+  margin: 6px 0;
+}
+
 /* Topic Index Page */
 
 .topics-index-page .topic-list .nav > li > a,
@@ -9436,6 +9445,20 @@ body {
   line-height: 38px;
 }
 
+.topic-reply hr {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.topic-reply a {
+  color: inherit;
+}
+
+.topic-reply .meta {
+  font-size: .9em;
+  color: #b3b3b3;
+}
+
 .pagination > .active > a,
 .pagination > .active > a:hover,
 .pagination > .active > a:focus,
@@ -9460,5 +9483,21 @@ body {
   color: #fff;
   background-color: #00b5ad !important;
   border-color: #00b5ad !important;
+}
+
+.nav-tabs > li.active > a {
+  color: #666;
+}
+
+.list-group-item a {
+  color: #00b5ad !important;
+}
+
+.nav-tabs > li > a {
+  color: #999 !important;
+}
+
+.nav-tabs > li.active > a {
+  color: #333 !important;
 }
 

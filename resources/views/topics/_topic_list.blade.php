@@ -3,9 +3,11 @@
     <ul class="media-list">
         @foreach ($topics as $topic)
             <li class="meta" style="position: relative; min-height: 150px; padding: 15px 2px 15px 0; border-bottom: 1px solid #f0f0f0; word-wrap: break-word;">
+                @if(isset($topic ->showimg))
                 <a href="{{ route('users.show', [$topic ->user_id]) }}" class="" style="display: block; width: 120px; height: 120px; position: absolute; top: 50%; margin-top: -60px; right: 5px;">
-                    <img src="{{ $topic->user->avatar }}" title="{{ $topic->user->avatar }}" style="display: block; width: 100%; height: 100%; border-radius: 4px; border: 1px solid #f0f0f0;">
+                    <img src="{{ $topic->showimg }}" title="{{ $topic->showimg }}" style="display: block; width: 100%; height: 100%; border-radius: 4px; border: 1px solid #f0f0f0;">
                 </a>
+                @endif
                 <div class="meta-content" style="padding-right: 160px;">
                     <div class="auth" style="margin-bottom: 15px; font-size: 12px;">
                         <a class="avatar" target="_blank" href="{{ route('users.show', [$topic ->user_id]) }}">

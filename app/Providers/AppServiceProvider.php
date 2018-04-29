@@ -16,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         \App\User::observe(\App\Observers\UserObserver::class);
+        \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+
+        \App\User::observe(\App\Observers\UserObserver::class);
         \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
 
         Schema::defaultStringLength(191);

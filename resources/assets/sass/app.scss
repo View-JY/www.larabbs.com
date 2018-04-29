@@ -91,6 +91,14 @@ body {
             margin-bottom: 0px;
         }
     }
+    
+    .meta {
+        font-size: .9em;
+        color: #b3b3b3;
+    }
+    .reply-content {
+        margin: 6px 0;
+    }
 }
 
 /* Topic Index Page */
@@ -490,6 +498,22 @@ body {
     }
 }
 
+.topic-reply {
+    hr {
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    a {
+        color: inherit;
+    }
+
+    .meta {
+        font-size: .9em;
+        color: #b3b3b3;
+    }
+}
+
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
     z-index: 3;
     color: #fff;
@@ -509,3 +533,18 @@ body {
     border-color: #00b5ad !important;
 }
 
+.nav-tabs > li.active > a {
+    color: #666;
+}
+
+.list-group-item a {
+    color: #00b5ad !important;
+}
+
+.nav-tabs > li > a {
+    color: #999 !important;
+}
+
+.nav-tabs > li.active > a {
+    color: #333 !important;
+}
