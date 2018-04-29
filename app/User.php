@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Topic;
 
 class User extends Authenticatable
 {
@@ -37,4 +38,11 @@ class User extends Authenticatable
             $user->activation_token = str_random(30);
         });
     }
+
+    public function topics()
+    {
+        return $this->hasMany(Topic::class);
+    }
+    
+    
 }

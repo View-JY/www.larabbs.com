@@ -139,6 +139,8 @@
             </a>
         </div>
     </div>
+
+    @include('topics._sidebar')
     
     <div class="list-group">
         <a href="#" class="list-group-item">Dapibus ac facilisis in <span class="badge">4</span></a>

@@ -2,47 +2,41 @@
 
     <ul class="media-list">
         @foreach ($topics as $topic)
-            <li class="media">
-                <div class="media-left">
-                    <a href="{{ route('users.show', [$topic ->user_id]) }}">
-                        <img class="media-object img-thumbnail" style="width: 52px; height: 52px;" src="{{ $topic->user->avatar }}" title="{{ $topic->user->name }}">
-                    </a>
-                </div>
-
-                <div class="media-body">
-
-                    <div class="media-heading">
-                        <a href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->title }}">
-                            {{ $topic->title }}
+            <li class="meta" style="position: relative; min-height: 150px; padding: 15px 2px 15px 0; border-bottom: 1px solid #f0f0f0; word-wrap: break-word;">
+                <a href="{{ route('users.show', [$topic ->user_id]) }}" class="" style="display: block; width: 120px; height: 120px; position: absolute; top: 50%; margin-top: -60px; right: 5px;">
+                    <img src="{{ $topic->user->avatar }}" title="{{ $topic->user->avatar }}" style="display: block; width: 100%; height: 100%; border-radius: 4px; border: 1px solid #f0f0f0;">
+                </a>
+                <div class="meta-content" style="padding-right: 160px;">
+                    <div class="auth" style="margin-bottom: 15px; font-size: 12px;">
+                        <a class="avatar" target="_blank" href="{{ route('users.show', [$topic ->user_id]) }}">
+                            <img src="{{ $topic->user->avatar }}" alt="64" style="display: inline-block; width: 32px; height: 32px; margin-right: 5px; border-radius: 50%;" data-toggle="tooltip" data-placement="left" title="{{ $topic->user->introduction }}">
                         </a>
-                        <a class="pull-right" href="{{ route('topics.show', [$topic->id]) }}" >
-                            <span class="badge"> {{ $topic->reply_count }} </span>
-                        </a>
+                        <div class="info" style="display: inline-block; vertical-align: middle;">
+                            <a class="nickname" target="_blank" href="{{ route('users.show', [$topic->user_id]) }}" style="vertical-align: middle; margin-right: 5px;">{{ $topic->user->name }}</a>
+                            <span class="time">{{ $topic ->created_at }}</span>
+                        </div>
                     </div>
 
-                    <div class="media-body meta">
+                    <a class="title" target="_blank" href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->user->name }}" style="font-size: 18px; line-height: 1.5; font-weight: 700; color: #333;">{{ $topic ->title }}</a>
 
-                        <a href="{{ route('categories.show', $topic->category->id) }}" title="{{ $topic->category->name }}">
+                    <p class="abstract" style="font-size: 12px; line-height: 24px; margin: 0 0 8px;">
+                        {{ $topic ->excerpt }}
+                    </p>
+
+                    <div class="" style="font-size: 12px; line-height: 20px;">
+                        <a href="{{ route('categories.show', $topic->category->id) }}" title="{{ $topic->category->name }}" style="margin-right: 5px; line-height: 20px;">
                             <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                              {{ $topic->category->name }}
                         </a>
-
-                        <span> • </span>
-                        <a href="{{ route('users.show', [$topic->user_id]) }}" title="{{ $topic->user->name }}">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            {{ $topic->user->name }}
+                        <a href="{{ route('topics.show', [$topic->id]) }}" title="评论数" style="margin-right: 5px; line-height: 20px;">
+                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            {{ $topic->reply_count }}
                         </a>
-                        <span> • </span>
                         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                        <span class="timeago" title="最后活跃于">{{ $topic->updated_at->diffForHumans() }}</span>
+                        <span class="timeago" title="最后活跃于" style="margin-right: 5px; line-height: 20px;">{{ $topic->updated_at->diffForHumans() }}</span>     
                     </div>
-
                 </div>
             </li>
-
-            @if ( ! $loop->last)
-                <hr>
-            @endif
 
         @endforeach
     </ul>
@@ -50,3 +44,11 @@
 @else
    <div class="empty-block">暂无数据 ~_~ </div>
 @endif
+
+@section('script')
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+@endsection

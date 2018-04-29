@@ -8376,6 +8376,19 @@ body {
   color: #00b5ad;
 }
 
+.navbar-static-top .dropdown-menu {
+  padding: 0px;
+}
+
+.navbar-static-top .dropdown-menu li a {
+  border-bottom: 1px solid #d8d8d8;
+  line-height: 2.4;
+}
+
+.navbar-static-top .dropdown-menu li a .glyphicon {
+  margin-right: 8px;
+}
+
 /* Sticky footer styles */
 
 html {
@@ -8464,6 +8477,36 @@ body {
   border-top: 1px solid #dcebf5;
 }
 
+/* User profile page */
+
+.users-show-page .user-info .thumbnail {
+  margin-bottom: 0px;
+}
+
+.users-show-page .nav-tabs {
+  margin-bottom: 20px;
+}
+
+.users-show-page .nav-tabs > li.active > a {
+  background-color: #fff;
+}
+
+.users-show-page .list-group .list-group-item {
+  border: none;
+  margin-bottom: 0px;
+  border-bottom: 1px solid #efefef;
+}
+
+.users-show-page .list-group .list-group-item .meta {
+  color: #b3b3b3;
+}
+
+.users-show-page .pagination {
+  margin: 12px 0;
+}
+
+/* Topic Index Page */
+
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
@@ -8494,6 +8537,6 @@ body {
   z-index: 2;
   color: #fff;
   background-color: #00b5ad !important;
-  border-color: #3097D1;
+  border-color: #00b5ad !important;
 }
 
