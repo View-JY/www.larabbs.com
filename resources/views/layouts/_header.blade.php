@@ -56,6 +56,12 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('topics.create') }}">                                    
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    新建帖子
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
