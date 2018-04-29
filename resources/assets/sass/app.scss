@@ -514,6 +514,26 @@ body {
     }
 }
 
+/* Notifications badge */
+
+.notifications-badge {
+    margin-top: -1;
+
+    .badge-fade {
+        background-color: #EBE8E8;
+    }
+
+    .badge-hint {
+        background-color: #00b5ad !important;;
+    }
+}
+
+.img-circle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
     z-index: 3;
     color: #fff;
@@ -547,4 +567,8 @@ body {
 
 .nav-tabs > li.active > a {
     color: #333 !important;
+}
+
+.infos a {
+    color: #00b5ad !important;
 }

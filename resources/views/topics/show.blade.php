@@ -41,6 +41,13 @@
 
                 <div class="topic-body">
                     {!! $topic->body !!}
+                    
+                    @include('common.share', [
+                        'bdText' => $topic ->body,
+                        'bdDesc' => $topic ->excerpt,
+                        'bdUrl' => route('topics.show', $topic->id),
+                        'bdPic' => $topic ->showImg
+                    ])
                 </div>
 
                 @can('update', $topic)

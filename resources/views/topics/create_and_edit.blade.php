@@ -38,12 +38,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <div class="form-group">
-                        
+                        <label for="name-field">标题</label>
                         <input class="form-control" type="text" name="title" value="{{ old('title', $topic->title ) }}" placeholder="请填写标题" required/>
                     </div>
 
                     <div class="form-group">
-                       
+                       <label for="name-field">分类</label>
                         <select class="form-control" name="category_id" required>
                             <option value="" hidden disabled selected>请选择分类</option>
                             @foreach ($categories as $value)
@@ -53,11 +53,13 @@
                     </div>
     
                     <div class="form-group">
+                        <label for="name-field">展示图</label>
                         <input id="file-Portrait" class="file" type="file" name="avatar">
                     </div>
                    
 
                     <div class="form-group">
+                        <label for="name-field">内容</label>
                         <textarea name="body" class="form-control" id="editor" rows="3" placeholder="请填入至少三个字符的内容。" required>{{ old('body', $topic->body ) }}</textarea>
                     </div>
 

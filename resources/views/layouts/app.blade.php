@@ -32,6 +32,8 @@
 
         @include('layouts._footer')
     </div>
+    
+    @include('common.top')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
