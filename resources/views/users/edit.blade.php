@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('link')
-<link href="{{ asset('bootstrapFileInput/fileinput.min.css') }}" rel="stylesheet">
+<link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet">
 @endsection;
 
 @section('content')
@@ -49,8 +49,8 @@
 </div>
 
 @section('script')
-<script src="{{ asset('bootstrapFileInput/fileinput.min.js') }}"></script>
-<script src="{{ asset('bootstrapFileInput/fileinput_locale_zh.js') }}"></script>
+<script src="{{ asset('js/fileinput.min.js') }}"></script>
+<script src="{{ asset('js/fileinput_locale_zh.js') }}"></script>
 <script>
     // Bootstrap FileInput
     function initFileInput(ctrlName, uploadUrl) {    
