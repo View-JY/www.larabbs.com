@@ -56,6 +56,7 @@ class TopicsController extends Controller
     public function update(TopicRequest $request, Topic $topic)
     {
         $this->authorize('update', $topic);
+        
         $topic->update($request->all());
 
         return redirect()->route('topics.show', $topic->id)->with('success', 'Updated successfully.');
