@@ -9,6 +9,7 @@ use App\Http\Requests\TopicRequest;
 use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
+use App\Models\Zan;
 
 class TopicsController extends Controller
 {
@@ -19,7 +20,7 @@ class TopicsController extends Controller
 
     public function index(Request $request, Topic $topic)
     {
-        $topics = Topic::with('user', 'category')->withOrder($request->order)->paginate(10);
+        $topics = Topic::with('user', 'category')->withOrder($request->order)->withCount(['zans']) ->paginate(10);
         
         return view('topics.index', compact('topics'));
     }
@@ -111,5 +112,24 @@ class TopicsController extends Controller
             }
         }
         return $data;
+    }
+    
+    public function zan(Topic $topic)
+    { 
+        $params = [
+            'user_id'  => Auth::id(),
+            'topic_id' => $topic ->id
+        ];
+        
+        $zan = Zan::firstOrCreate($params);
+       
+        return back();
+    }
+    
+    public function unzan(Topic $topic)
+    {
+        $topic ->zan(Auth::id()) ->delete();
+        
+        return back();
     }
 }

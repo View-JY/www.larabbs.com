@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Topic;
 use App\Models\Reply;
+use App\Models\Zan;
 use Auth;
 
 class User extends Authenticatable
@@ -67,5 +68,10 @@ class User extends Authenticatable
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+    
+    public function zan()
+    {
+        return $this ->hasOne(Zan::class);
     }
 }

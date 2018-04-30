@@ -29,6 +29,7 @@
                         </form>
                     </span>
                     @endcan
+                    
                 </div>
                 <div class="reply-content">
                     {!! $reply->content !!}
@@ -40,8 +41,7 @@
                     <a href="#" style="color: #999 !important;" data-toggle="modal" data-target="#myModal" class="js_sub_reply" data-replyid="{{ $reply ->user ->id }}" data-name="{{ $reply ->user ->name }}"><span class="glyphicon glyphicon-comment"></span> 点击回复</a>
                 </div>
                 @endif
-                
-                @include('reply.sub_reply')
+               
             </div>
         </div>
         <hr>

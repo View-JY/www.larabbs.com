@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubreplysTable extends Migration
+class CreateZansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateSubreplysTable extends Migration
      */
     public function up()
     {
-        Schema::create('subreplies', function (Blueprint $table) {
+        Schema::create('zans', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('reply_id')->default(0)->index();
-            $table->integer('topic_id')->default(0)->index();
-            $table->integer('user_id')->default(0)->index();
-            $table->text('content')->nullable()->comment('描述');
+            $table->integer('user_id')->default(0);
+            $table->integer('topic_id')->default(0);    
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateSubreplysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subreplies');
+        Schema::dropIfExists('zans');
     }
 }

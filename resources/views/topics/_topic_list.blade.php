@@ -34,6 +34,10 @@
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             {{ $topic->reply_count }}
                         </a>
+                        <a href="{{ route('zans.show', $topic ->id) }}" title="点赞数" style="margin-right: 5px; line-height: 20px;">
+                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                            {{ $topic ->zans_count }}
+                        </a>
                         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                         <span class="timeago" title="最后活跃于" style="margin-right: 5px; line-height: 20px;">{{ $topic->updated_at->diffForHumans() }}</span>     
                     </div>

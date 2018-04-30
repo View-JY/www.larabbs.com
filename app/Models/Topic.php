@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\User;
 use App\Models\Reply;
+use App\Models\Zan;
 
 class Topic extends Model
 {
@@ -57,4 +58,16 @@ class Topic extends Model
     {
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
     }
+    
+    // 和用户进行关联
+    public function zan($user_id)
+    {
+        return $this ->hasOne(Zan::class) ->where('user_id', $user_id);
+    }
+    
+    // 和文章进行关联
+    public function zans()
+    {
+        return $this ->hasMany(Zan::class);
+    } 
 }

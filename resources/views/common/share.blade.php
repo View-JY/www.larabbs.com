@@ -24,13 +24,6 @@
 		share : [{
 			"bdSize" : 16
 		}],
-		image : [{
-			viewType : 'list',
-			viewPos : 'top',
-			viewColor : 'black',
-			viewSize : '32',
-			viewList : ['qzone','tsina','huaban','tqq','renren']
-		}],
 		selectShare : [{
                     "bdselectMiniList" : ['qzone','tqq','kaixin001','bdxc','tqf']
 		}]

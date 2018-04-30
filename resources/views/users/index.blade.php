@@ -4,6 +4,10 @@
 
 @section('content')
 
+@if(Auth::id() !== $user ->id)
+    <div class="alert alert-success" role="alert">{{ Auth::user() ->name }} 欢迎来到,{{ $user ->name }} 的主页,快来加关注吧!</div>
+@endif
+
 <div class="row">
 
     <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
@@ -28,6 +32,15 @@
                 </div>
             </div>
         </div>
+        
+        
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{{ route('topics.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 点击关注作者 ☺
+                </a>
+            </div>
+        </div>
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <div class="panel panel-default">
@@ -35,10 +48,12 @@
                 <span>
                     <h1 class="panel-title pull-left" style="font-size:30px;">{{ $user->name }} <small>{{ $user->email }}</small></h1>
                 </span>
+                @if(Auth::id() === $user ->id)
                 <a href="{{ route('users.edit', Auth::id()) }}" type="button" class="btn btn-success pull-right">
                     <span class="glyphicon glyphicon-user"></span>
                     点击编辑个人资料
                 </a>
+                @endif
             </div>
         </div>
         <hr>

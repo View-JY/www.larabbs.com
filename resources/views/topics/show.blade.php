@@ -23,6 +23,15 @@
                 </div>
             </div>
         </div>
+        @if(Auth::id() !== $topic ->user ->id)
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <a href="{{ route('topics.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 关注该作者
+                </a>
+            </div>
+        </div>
+        @endif
     </div>
 
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 topic-content">
@@ -67,6 +76,21 @@
                         </form>
                     </div>
                 @endcan
+                
+                @if(Auth::id() !== $topic ->user ->id)
+                    <div class="operate">
+                        <hr>
+                        @if($topic ->zan(Auth::id()) ->exists())
+                        <a href="{{ route('topics.unzan', $topic->id) }}" class="btn btn-success pull-left" role="button">
+                            <i class="glyphicon glyphicon-thumbs-up"></i> 取消赞
+                        </a>
+                        @else
+                        <a href="{{ route('topics.zan', $topic->id) }}" class="btn btn-default pull-left" role="button">
+                            <i class="glyphicon glyphicon-thumbs-up"></i> 点赞
+                        </a>
+                        @endif
+                    </div>
+                @endif
 
             </div>
         </div>
