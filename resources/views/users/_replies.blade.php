@@ -19,7 +19,9 @@
 </ul>
 
 @else
-   <div class="empty-block">暂无数据 ~_~ </div>
+<div class="empty-block">
+    @include('layouts._empty')
+</div>
 @endif
 
 {{-- 分页 --}}

@@ -28,18 +28,32 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
+Route::get('/users/all', 'UsersController@all') ->name('users.all');
+Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
+
+Route::post('followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('topics/zan/{topic}', 'TopicsController@zan') ->name('topics.zan');
 Route::get('topics/unzan/{topic}', 'TopicsController@unzan') ->name('topics.unzan');
 
+Route::get('topics/bookmark/{topic}', 'TopicsController@bookmark') ->name('topics.bookmark');
+Route::get('topics/unbookmark/{topic}', 'TopicsController@unbookmark') ->name('topics.unbookmark');
+
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
+Route::get('replies/replyzan/{reply}', 'RepliesController@replyzan') ->name('replies.replyzan');
+Route::get('replies/unreplyzan/{reply}', 'RepliesController@unreplyzan') ->name('replies.unreplyzan');
 Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
 
 Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
 Route::get('zans/{topic}', 'ZansController@show') ->name('zans.show');
+
+Route::get('bookmark/{user}', 'BookmarksController@show') ->name('bookmarks.show');

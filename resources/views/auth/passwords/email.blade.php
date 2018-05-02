@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<div style="background-image: url('http://www.larabbs.com/images/sign_bg.png');background-repeat: no-repeat;background-color: #b8e5f8;background-size: cover; width: 100%;height: 100vh;overflow: auto;padding-right: 15px; z-index: -11; position: absolute; top: 0; left: 0;"></div>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

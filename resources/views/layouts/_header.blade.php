@@ -19,7 +19,7 @@
             
             <form class="navbar-form navbar-left">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="搜索你想看的文章">
                 </div>
                 <button type="submit" class="btn btn-default">搜你想要的</button>
             </form>
@@ -63,13 +63,19 @@
                             <li>
                                 <a href="{{ route('users.show', Auth::id()) }}">                                    
                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                                    个人资料
+                                    个人中心
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('topics.create') }}">                                    
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     新建帖子
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('bookmarks.show', Auth::id()) }}">                                    
+                                    <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
+                                    我的收藏
                                 </a>
                             </li>
                             <li>

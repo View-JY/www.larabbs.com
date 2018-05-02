@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReplyRequest;
 use Auth;
+use App\Models\Replyzans;
 
 class RepliesController extends Controller
 {
@@ -30,8 +31,6 @@ class RepliesController extends Controller
         return redirect()->route('topics.show', $reply->topic_id)->with('success', '回复创建成功.');
     }
 
-	
-
     public function destroy(Reply $reply)
     {
         $this->authorize('destroy', $reply);
@@ -39,5 +38,24 @@ class RepliesController extends Controller
         $reply->delete();
 
         return redirect()->route('topics.show', $reply->topic_id)->with('success', '回复删除成功.');
+    }
+    
+    public function replyzan(Reply $reply)
+    { 
+        $params = [
+            'user_id'  => Auth::id(),
+            'reply_id' => $reply ->id
+        ];
+        
+        Replyzans::firstOrCreate($params);
+       
+        return back();
+    }
+    
+    public function unreplyzan(Reply $reply)
+    {
+        $reply ->replyzan(Auth::id()) ->delete();
+        
+        return back();
     }
 }

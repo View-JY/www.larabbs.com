@@ -18,13 +18,43 @@
                         @if($user ->avatar)
                         <img class="thumbnail img-responsive" src="{{ $user ->avatar }}" width="300px" height="300px">
                         @else
-                        <img class="thumbnail img-responsive" src="https://fsdhubcdn.phphub.org/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/600/h/600" width="300px" height="300px">
+                            @if($user ->level == 1)
+                            <img class="thumbnail img-responsive" src="http://www.larabbs.com/images/man.png" width="300px" height="300px">
+                            @else
+                            <img class="thumbnail img-responsive" src="http://www.larabbs.com/images/woman.jpg" width="300px" height="300px">
+                            @endif
                         @endif
                     </div>
+                    
+                    <div class="stats">
+                        <a href="{{ route('users.followings', $user->id) }}">
+                          <strong id="following" class="stat">
+                            {{ count($user->followings) }}
+                          </strong>
+                          关注
+                        </a>
+                        <a href="{{ route('users.followers', $user->id) }}">
+                          <strong id="followers" class="stat">
+                            {{ count($user->followers) }}
+                          </strong>
+                          粉丝
+                        </a>
+                        <a href="#">
+                          <strong id="followers" class="stat">
+                            {{ $user->replies()->with('topic')->recent() ->count() }}
+                          </strong>
+                          话题
+                        </a>
+                     </div>
+                    
                     <div class="media-body">
                         <hr>
                         <h4><strong>个人简介</strong></h4>
+                        @if($user ->introduction)
                         <p>{{ $user ->introduction }}</p>
+                        @else
+                        <p>这家伙很懒,什么也没留下......</p>
+                        @endif
                         <hr>
                         <h4><strong>注册于</strong></h4>
                         <p>{{ $user ->created_at ->diffForHumans() }}</p>
@@ -33,14 +63,9 @@
             </div>
         </div>
         
-        
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <a href="{{ route('topics.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 点击关注作者 ☺
-                </a>
-            </div>
-        </div>
+        @if (Auth::check())
+            @include('users.follow_form')
+        @endif
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <div class="panel panel-default">

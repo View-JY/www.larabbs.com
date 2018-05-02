@@ -40,6 +40,17 @@
                         <input id="file-Portrait" class="file" type="file" name="avatar">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="introduction-field">性别</label>
+                    <div class="form-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="level" id="inlineRadio1" value="1" {{ $user->level == 1 ? 'checked' : '' }}/> 男
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="level" id="inlineRadio2" value="0" {{ $user->level == 0 ? 'checked' : '' }}/> 女
+                        </label>
+                    </div>
+                </div>
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-success">点击保存个人信息</button>
                 </div>

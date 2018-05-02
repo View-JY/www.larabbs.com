@@ -5,6 +5,8 @@ namespace App\Models;
 use App\User;
 use App\Models\Reply;
 use App\Models\Zan;
+use App\Models\Bookmark;
+use App\Models\VisitorRegistry;
 
 class Topic extends Model
 {
@@ -70,4 +72,21 @@ class Topic extends Model
     {
         return $this ->hasMany(Zan::class);
     } 
+    
+    // 和用户进行关联
+    public function bookmark($user_id)
+    {
+        return $this ->hasOne(Bookmark::class) ->where('user_id', $user_id);
+    }
+    
+    // 和文章进行关联
+    public function bookmarks()
+    {
+        return $this ->hasMany(Bookmark::class);
+    } 
+    
+    public function visitors()
+    {
+        return $this->hasMany(VisitorRegistry::class);
+    }
 }

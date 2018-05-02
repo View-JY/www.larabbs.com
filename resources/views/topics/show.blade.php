@@ -23,14 +23,9 @@
                 </div>
             </div>
         </div>
-        @if(Auth::id() !== $topic ->user ->id)
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <a href="{{ route('topics.create') }}" class="btn btn-success btn-block" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 关注该作者
-                </a>
-            </div>
-        </div>
+        
+        @if (Auth::check())
+            @include('users.follow_form', ['user' => $topic->user])
         @endif
     </div>
 
@@ -46,6 +41,8 @@
                     ⋅
                     <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
                     {{ $topic->reply_count }}
+                    
+                    浏览:{{ count($topic->visitors) }}
                 </div>
 
                 <div class="topic-body">
@@ -81,12 +78,22 @@
                     <div class="operate">
                         <hr>
                         @if($topic ->zan(Auth::id()) ->exists())
-                        <a href="{{ route('topics.unzan', $topic->id) }}" class="btn btn-success pull-left" role="button">
+                        <a href="{{ route('topics.unzan', $topic->id) }}" class="btn btn-default pull-left" role="button">
                             <i class="glyphicon glyphicon-thumbs-up"></i> 取消赞
                         </a>
                         @else
-                        <a href="{{ route('topics.zan', $topic->id) }}" class="btn btn-default pull-left" role="button">
+                        <a href="{{ route('topics.zan', $topic->id) }}" class="btn btn-success pull-left" role="button">
                             <i class="glyphicon glyphicon-thumbs-up"></i> 点赞
+                        </a>
+                        @endif
+                        
+                        @if($topic ->bookmark(Auth::id()) ->exists())
+                        <a href="{{ route('topics.unbookmark', $topic->id) }}" class="btn btn-default pull-left" role="button" style="margin-left: 15px;">
+                            <i class="glyphicon glyphicon-heart"></i> 取消收藏
+                        </a>
+                        @else
+                        <a href="{{ route('topics.bookmark', $topic->id) }}" class="btn btn-success pull-left" role="button" style="margin-left: 15px;">
+                            <i class="glyphicon glyphicon-heart"></i> 收藏文章
                         </a>
                         @endif
                     </div>
@@ -102,6 +109,13 @@
                 @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
             </div>
         </div>
+        
+        @include('topics.recommend', ['recommend' => $recommend])
     </div>
+   
 </div>
+
+
 @stop
+
+

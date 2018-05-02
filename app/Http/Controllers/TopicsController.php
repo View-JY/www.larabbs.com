@@ -10,9 +10,11 @@ use App\Models\Category;
 use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Zan;
+use App\Models\VisitorRegistry;
+//use Weboap\Visitor\Visitor;
 
 class TopicsController extends Controller
-{
+{   
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index', 'show']]);
@@ -20,14 +22,18 @@ class TopicsController extends Controller
 
     public function index(Request $request, Topic $topic)
     {
-        $topics = Topic::with('user', 'category')->withOrder($request->order)->withCount(['zans']) ->paginate(10);
+        $topics = Topic::with('user', 'category', 'reply', 'replyzans')->withOrder($request->order)->withCount(['zans']) ->paginate(10);
         
         return view('topics.index', compact('topics'));
     }
 
     public function show(Topic $topic)
-    {
-        return view('topics.show', compact('topic'));
+    {  
+        $recommend = Topic::with('user', 'category') ->where('category_id', $topic ->category_id) ->orderBy(\DB::raw('RAND()')) ->take(10) ->get();
+        
+        \Visitor::log($topic ->id);
+        
+        return view('topics.show', compact('topic', 'recommend'));
     }
 
     public function create(Topic $topic)
@@ -84,7 +90,7 @@ class TopicsController extends Controller
     }
 
     public function destroy(Topic $topic)
-    {
+    {   
         $this->authorize('destroy', $topic);
         
         $topic->delete();
@@ -121,7 +127,7 @@ class TopicsController extends Controller
             'topic_id' => $topic ->id
         ];
         
-        $zan = Zan::firstOrCreate($params);
+        Zan::firstOrCreate($params);
        
         return back();
     }
@@ -129,6 +135,25 @@ class TopicsController extends Controller
     public function unzan(Topic $topic)
     {
         $topic ->zan(Auth::id()) ->delete();
+        
+        return back();
+    }
+    
+    public function bookmark(Topic $topic)
+    {
+        $params = [
+            'user_id'  => Auth::id(),
+            'topic_id' => $topic ->id
+        ];
+        
+        Bookmark::firstOrCreate($params);
+       
+        return back();
+    }
+    
+    public function unbookmark(Topic $topic)
+    {
+        $topic ->Bookmark(Auth::id()) ->delete();
         
         return back();
     }

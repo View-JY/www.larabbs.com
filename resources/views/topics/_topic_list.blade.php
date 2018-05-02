@@ -10,9 +10,11 @@
                 @endif
                 <div class="meta-content" style="padding-right: 160px;">
                     <div class="auth" style="margin-bottom: 15px; font-size: 12px;">
+                        @if($topic->user->avatar)
                         <a class="avatar" target="_blank" href="{{ route('users.show', [$topic ->user_id]) }}">
                             <img src="{{ $topic->user->avatar }}" alt="64" style="display: inline-block; width: 32px; height: 32px; margin-right: 5px; border-radius: 50%;" data-toggle="tooltip" data-placement="left" title="{{ $topic->user->introduction }}">
                         </a>
+                        @endif
                         <div class="info" style="display: inline-block; vertical-align: middle;">
                             <a class="nickname" target="_blank" href="{{ route('users.show', [$topic->user_id]) }}" style="vertical-align: middle; margin-right: 5px;">{{ $topic->user->name }}</a>
                             <span class="time">{{ $topic ->created_at }}</span>
@@ -48,7 +50,9 @@
     </ul>
 
 @else
-   <div class="empty-block">暂无数据 ~_~ </div>
+<div class="empty-block">
+    @include('layouts._empty')
+</div>
 @endif
 
 @section('script')

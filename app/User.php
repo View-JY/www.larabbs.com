@@ -7,7 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\Topic;
 use App\Models\Reply;
 use App\Models\Zan;
+use App\Models\Bookmark;
 use Auth;
+use App\Models\Replyzans;
 
 class User extends Authenticatable
 {
@@ -30,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'introduction', 'avatar',
+        'name', 'email', 'password', 'introduction', 'avatar', 'level'
     ];
 
     /**
@@ -73,5 +75,46 @@ class User extends Authenticatable
     public function zan()
     {
         return $this ->hasOne(Zan::class);
+    }
+    
+    public function replyzan()
+    {
+        return $this ->hasOne(Replyzans::class);
+    }
+    
+    public function bookmark()
+    {
+        return $this ->hasMany(Bookmark::class);
+    }
+    
+    public function followers()
+    {
+        return $this->belongsToMany(User::Class, 'followers', 'user_id', 'follower_id');
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
+    }
+    
+    public function follow($user_id)
+    {
+        if (!is_array($user_id)) {
+            $user_ids = compact('user_id');
+        }
+        $this->followings()->sync($user_id, false);
+    }
+
+    public function unfollow($user_id)
+    {
+        if (!is_array($user_id)) {
+            $user_ids = compact('user_id');
+        }
+        $this->followings()->detach($user_id);
+    }
+    
+    public function isFollowing($user_id)
+    {
+        return $this->followings->contains($user_id);
     }
 }

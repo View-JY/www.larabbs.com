@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Models\Topic;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -25,6 +28,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $users = User::all() ->where('id', '!=', \Auth::id());
+        $topics = Topic::all();
+        $categories = Category::orderBy(\DB::raw('RAND()')) ->take(5) ->get();;
+        
+        return view('home.index', compact('users', 'topics', 'categories'));
     }
+ 
+    
 }

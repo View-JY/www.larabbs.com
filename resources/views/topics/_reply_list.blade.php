@@ -37,8 +37,11 @@
                 
                 @if(Auth::id() !== $reply ->user ->id)
                 <div>
-                    <a href="#" style="color: #999 !important; margin-right: 5px;"><span class="glyphicon glyphicon-heart"></span> 32个赞</a>
-                    <a href="#" style="color: #999 !important;" data-toggle="modal" data-target="#myModal" class="js_sub_reply" data-replyid="{{ $reply ->user ->id }}" data-name="{{ $reply ->user ->name }}"><span class="glyphicon glyphicon-comment"></span> 点击回复</a>
+                    @if($reply ->replyzan(Auth::id()) ->exists())
+                    <a href="{{ route('replies.unreplyzan', $reply ->id) }}" style="color: #999 !important; margin-right: 5px;"><span class="glyphicon glyphicon-heart"></span> 取消赞</a>
+                    @else
+                    <a href="{{ route('replies.replyzan', $reply ->id) }}" style="color: #259d6d !important; margin-right: 5px;"><span class="glyphicon glyphicon-heart"></span> 赞</a>
+                    @endif
                 </div>
                 @endif
                
