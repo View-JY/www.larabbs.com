@@ -11,7 +11,6 @@ use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Zan;
 use App\Models\VisitorRegistry;
-//use Weboap\Visitor\Visitor;
 
 class TopicsController extends Controller
 {   
@@ -22,7 +21,7 @@ class TopicsController extends Controller
 
     public function index(Request $request, Topic $topic)
     {
-        $topics = Topic::with('user', 'category', 'reply', 'replyzans')->withOrder($request->order)->withCount(['zans']) ->paginate(10);
+        $topics = Topic::with('user', 'category')->withOrder($request->order)->withCount(['zans']) ->paginate(10);
         
         return view('topics.index', compact('topics'));
     }
@@ -31,7 +30,7 @@ class TopicsController extends Controller
     {  
         $recommend = Topic::with('user', 'category') ->where('category_id', $topic ->category_id) ->orderBy(\DB::raw('RAND()')) ->take(10) ->get();
         
-        \Visitor::log($topic ->id);
+        \Visitor::log($topic ->id); // 统计文章访问量 - 通过IP识别
         
         return view('topics.show', compact('topic', 'recommend'));
     }

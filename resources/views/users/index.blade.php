@@ -4,10 +4,6 @@
 
 @section('content')
 
-@if(Auth::id() !== $user ->id)
-    <div class="alert alert-success" role="alert">{{ Auth::user() ->name }} 欢迎来到,{{ $user ->name }} 的主页,快来加关注吧!</div>
-@endif
-
 <div class="row">
 
     <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
