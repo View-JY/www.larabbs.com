@@ -76,13 +76,13 @@ class Topic extends Model
     // 和用户进行关联
     public function bookmark($user_id)
     {
-        return $this ->hasOne(Bookmark::class) ->where('user_id', $user_id);
+        return $this ->hasMany(Bookmark::class) ->where('user_id', $user_id);
     }
     
     // 和文章进行关联
     public function bookmarks()
     {
-        return $this ->hasMany(Bookmark::class);
+        return $this ->hasOne(Bookmark::class);
     } 
     
     public function visitors()

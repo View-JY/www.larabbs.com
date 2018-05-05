@@ -37,12 +37,11 @@
                 </h1>
 
                 <div class="article-meta text-center">
-                    {{ $topic->created_at->diffForHumans() }}
-                    ⋅
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                    {{ $topic->reply_count }}
+                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>  发表于:{{ $topic->created_at->diffForHumans() }}
                     
-                    浏览:{{ count($topic->visitors) }}
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>  评论:{{ $topic->reply_count }}
+                    
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>  浏览:{{ count($topic->visitors) }}
                 </div>
 
                 <div class="topic-body">
@@ -106,7 +105,13 @@
         <div class="panel panel-default topic-reply">
             <div class="panel-body">
                 @includeWhen(Auth::check(), 'topics._reply_box', ['topic' => $topic])
-                @include('topics._reply_list', ['replies' => $topic->replies()->with('user')->get()])
+                
+                <a href="{{ route('topics.show', ['topic' => $topic]) }}" class="btn btn-success" style="color: #FFF;">看全部评论</a>
+                
+                <a href="{{ route('topics.show', ['topic' => $topic, 'only' => true]) }}" class="btn btn-success" style="color: #FFF;">只看自己的评论</a>
+                <hr/>
+                
+                @include('topics._reply_list', ['replies' => $replies])
             </div>
         </div>
         

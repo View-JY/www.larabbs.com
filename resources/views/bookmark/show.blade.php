@@ -9,7 +9,8 @@
 
 <div class="panel-body">
     <div class="alert alert-success" role="alert">这里是我收藏的文章</div>
-    @if (count($topics))
+    
+    @if (Auth::check() && count($topics) )
     <ul class="media-list">
         @foreach ($topics as $topic)
             <li class="meta" style="position: relative; min-height: 150px; padding: 15px 2px 15px 0; border-bottom: 1px solid #f0f0f0; word-wrap: break-word;">
@@ -54,16 +55,15 @@
                         <span class="timeago" title="最后活跃于" style="margin-right: 5px; line-height: 20px;">{{ $topic ->topic->updated_at->diffForHumans() }}</span>     
                     </div>
                 </div>
-                <a href="{{ route('topics.unbookmark', $topic ->id) }}" class="btn btn-default" style="position: absolute; right: 10px; top: 50%; margin-top: -18px; z-index: 100;">取消收藏</a>
+                <a href="{{ route('topics.unbookmark', $topic -> topic ->id) }}" class="btn btn-default" style="position: absolute; right: 10px; top: 50%; margin-top: -18px; z-index: 100;">取消收藏</a>
             </li>
         @endforeach
     </ul>
-
-@else
-<div class="empty-block">
-    @include('layouts._empty')
-</div>
-@endif
+    @else
+    <div class="empty-block">
+        @include('layouts._empty')
+    </div>
+    @endif
 
 @section('script')
     <script>

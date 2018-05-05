@@ -10,6 +10,9 @@ use App\Models\Zan;
 use App\Models\Bookmark;
 use Auth;
 use App\Models\Replyzans;
+use App\Models\Help;
+use App\Models\Photo;
+use App\Models\Phototype;
 
 class User extends Authenticatable
 {
@@ -116,5 +119,20 @@ class User extends Authenticatable
     public function isFollowing($user_id)
     {
         return $this->followings->contains($user_id);
+    }
+    
+    public function help()
+    {
+        return $this ->hasMany(Help::class);
+    }
+    
+    public function photo()
+    {
+        return $this ->hasMany(Photo::class);
+    }
+    
+    public function phototype()
+    {
+        return $this ->hasMany(Phototype::class);
     }
 }

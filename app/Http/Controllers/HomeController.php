@@ -34,6 +34,4 @@ class HomeController extends Controller
         
         return view('home.index', compact('users', 'topics', 'categories'));
     }
- 
-    
 }

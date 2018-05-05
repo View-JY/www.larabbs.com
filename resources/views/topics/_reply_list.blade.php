@@ -1,4 +1,5 @@
 <div class="reply-list">
+    @if($replies ->count())
     @foreach ($replies as $index => $reply)
         <div class=" media"  name="reply{{ $reply->id }}" id="reply{{ $reply->id }}">
             <div class="avatar pull-left">
@@ -32,7 +33,7 @@
                     
                 </div>
                 <div class="reply-content">
-                    {!! $reply->content !!}
+                    {!! $reply->content !!} 
                 </div>
                 
                 @if(Auth::id() !== $reply ->user ->id)
@@ -42,6 +43,8 @@
                     @else
                     <a href="{{ route('replies.replyzan', $reply ->id) }}" style="color: #259d6d !important; margin-right: 5px;"><span class="glyphicon glyphicon-heart"></span> 赞</a>
                     @endif
+                    
+                    <a href="#" style=""><span class=""></span> 举报</a>
                 </div>
                 @endif
                
@@ -49,30 +52,12 @@
         </div>
         <hr>
     @endforeach
+    
+    @else
+        @include('layouts._empty')
+    @endif
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <form action="">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">回复</h4>
-      </div>
-      <div class="modal-body">
-          <input type="hidden" value="" name="reply_id"/>
-          
-          <textarea rows="3" placeholder="写下你的想法" name="content" class="form-control" style="resize: none;"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="submit" class="btn btn-success">点击回复</button>
-      </div>
-    </div>
-  </div>
-  </form>
-</div>
 
 @section('script')
     <script>

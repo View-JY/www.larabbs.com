@@ -11,6 +11,7 @@ use Auth;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Zan;
 use App\Models\VisitorRegistry;
+use App\Models\Bookmark;
 
 class TopicsController extends Controller
 {   
@@ -26,15 +27,21 @@ class TopicsController extends Controller
         return view('topics.index', compact('topics'));
     }
 
-    public function show(Topic $topic)
-    {  
-        $recommend = Topic::with('user', 'category') ->where('category_id', $topic ->category_id) ->orderBy(\DB::raw('RAND()')) ->take(10) ->get();
+    public function show(Topic $topic, $only = false)
+    {      
+        $recommend = Topic::with('user', 'category', 'replies') ->where('category_id', $topic ->category_id) ->orderBy(\DB::raw('RAND()')) ->take(10) ->get();
         
+        if( request() ->get('only') == 1 ) {
+            $replies = $topic ->replies()->with('user') ->only() ->orderBy('created_at', 'desc') ->get();
+        } else {
+            $replies = $topic ->replies()->with('user') ->orderBy('created_at', 'desc') ->get();
+        }
+
         \Visitor::log($topic ->id); // 统计文章访问量 - 通过IP识别
         
-        return view('topics.show', compact('topic', 'recommend'));
+        return view('topics.show', compact('topic', 'recommend', 'replies'));
     }
-
+    
     public function create(Topic $topic)
     {
         $categories = Category::all();

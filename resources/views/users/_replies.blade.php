@@ -1,21 +1,25 @@
 @if (count($replies))
 
 <ul class="list-group">
-    @foreach ($replies as $reply)
+    @if(Auth::check())
+        @foreach ($replies as $reply)
+            <li class="list-group-item">
+                <div class="reply-content" style="margin: 6px 0;">
+                    {!! $reply->content !!}
+                </div>
+
+                <div class="meta">
+                    <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 回复于 {{ $reply->created_at->diffForHumans() }}
+                </div>
+            </li>
+        @endforeach
+    @else
         <li class="list-group-item">
-            <a href="{{ $reply->topic}}">
-                {{ $reply->topic->title }}
+            <a href="{{ route('login') }}">
+                登录之后才能看偶~~赶快登录吧
             </a>
-
-            <div class="reply-content" style="margin: 6px 0;">
-                {!! $reply->content !!}
-            </div>
-
-            <div class="meta">
-                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 回复于 {{ $reply->created_at->diffForHumans() }}
-            </div>
         </li>
-    @endforeach
+    @endif
 </ul>
 
 @else

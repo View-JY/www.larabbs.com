@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Topic;
 use App\User;
 use App\Models\Replyzans;
+use Auth;
 
 class Reply extends Model
 {
@@ -30,5 +31,10 @@ class Reply extends Model
     public function replyzans()
     {
         return $this ->hasMany(Replyzans::class);
+    }
+    
+    public function scopeOnly($query)
+    {
+        $query ->where('user_id', Auth::id());
     }
 }

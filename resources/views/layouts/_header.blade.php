@@ -17,9 +17,9 @@
             
             <p class="navbar-text">The world is mad, Me too......</p>
             
-            <form class="navbar-form navbar-left">
+            <form class="navbar-form navbar-left" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索你想看的文章">
+                    <input type="text" class="form-control" placeholder="搜索你想看的文章" name="text">
                 </div>
                 <button type="submit" class="btn btn-default">搜你想要的</button>
             </form>
@@ -76,6 +76,18 @@
                                 <a href="{{ route('bookmarks.show', Auth::id()) }}">                                    
                                     <span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>
                                     我的收藏
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('photos.index') }}">                                    
+                                    <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                                    我的照片墙
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('help.index') }}">                                    
+                                    <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                                    意见反馈
                                 </a>
                             </li>
                             <li>

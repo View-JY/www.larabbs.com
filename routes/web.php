@@ -33,16 +33,14 @@ Route::get('/users/{user}/followings', 'UsersController@followings')->name('user
 Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
 Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
-
 Route::post('followers/{user}', 'FollowersController@store')->name('followers.store');
 Route::delete('followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
 
-Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 Route::get('topics/zan/{topic}', 'TopicsController@zan') ->name('topics.zan');
 Route::get('topics/unzan/{topic}', 'TopicsController@unzan') ->name('topics.unzan');
-
 Route::get('topics/bookmark/{topic}', 'TopicsController@bookmark') ->name('topics.bookmark');
 Route::get('topics/unbookmark/{topic}', 'TopicsController@unbookmark') ->name('topics.unbookmark');
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
 
 Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
 
@@ -57,3 +55,15 @@ Route::resource('notifications', 'NotificationsController', ['only' => ['index']
 Route::get('zans/{topic}', 'ZansController@show') ->name('zans.show');
 
 Route::get('bookmark/{user}', 'BookmarksController@show') ->name('bookmarks.show');
+
+Route::get('/help', 'HelpController@index') ->name('help.index');
+Route::post('/help/create', 'HelpController@create') ->name('help.create');
+
+// 照片墙
+Route::get('/photos', 'PhotosController@index') ->name('photos.index');
+Route::get('/photos/show/{phototype}', 'PhotosController@show') ->name('photos.show');
+Route::post('/photos/create', 'PhotosController@create') ->name('photos.create');
+Route::post('/photos/createtype', 'PhotosController@createtype') ->name('photos.createtype');
+Route::get('/photos/deletetype/{phototype}', 'PhotosController@deletetype') ->name('photos.deletetype');
+Route::get('/photos/deletephoto/{photo}', 'PhotosController@deletephoto') ->name('photos.deletephoto');
+Route::get('/photos/downphoto', 'PhotosController@downphoto') ->name('photos.downphoto');

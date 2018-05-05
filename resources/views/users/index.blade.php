@@ -4,6 +4,10 @@
 
 @section('content')
 
+@if(Auth::check() && Auth::id() !== $user ->id)
+    <div class="alert alert-success" role="alert">{{ Auth::user() ->name }} 欢迎来到,{{ $user ->name }} 的主页,快来加关注吧!</div>
+@endif
+
 <div class="row">
 
     <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
@@ -89,11 +93,16 @@
                     <li class="{{ active_class(if_query('tab', 'replies')) }}">
                         <a href="{{ route('users.show', [$user->id, 'tab' => 'replies']) }}">Ta 的回复</a>
                     </li>
+                    <li class="{{ active_class(if_query('tab', 'photos')) }}">
+                        <a href="{{ route('users.show', [$user->id, 'tab' => 'photos']) }}">Ta 的相册</a>
+                    </li>
                 </ul>
                 @if (if_query('tab', 'replies'))
                     @include('users._replies', ['replies' => $user->replies()->with('topic')->recent()->paginate(5)])
+                @elseif(if_query('tab', 'photos'))
+                    @include('users._photos', ['photos' => $user->phototype()->paginate(5)])
                 @else
-                    @include('users._topics', ['topics' => $user->topics()->recent()->paginate(5)])
+                    @include('users._topics', ['topics' => $user->topics()->paginate(5)])
                 @endif
             </div>
         </div>
